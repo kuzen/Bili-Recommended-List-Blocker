@@ -20,7 +20,7 @@
         constructor(blockList) {
             this.blockList = blockList;
             this.css = {
-                blockDiv: '.bili-block-uid .bili-block-uid__icon{pointer-events:none;user-select:none;width:22px;height:22px;color:#fff}.bili-block-uid__icon{pointer-events:none;user-select:none;width:22px;height:22px;color:#fff;background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDQ4IDQ4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC4wMSIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjQgNDRDMzUuMDQ1NyA0NCA0NCAzNS4wNDU3IDQ0IDI0QzQ0IDEyLjk1NDMgMzUuMDQ1NyA0IDI0IDRDMTIuOTU0MyA0IDQgMTIuOTU0MyA0IDI0QzQgMzUuMDQ1NyAxMi45NTQzIDQ0IDI0IDQ0WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjNmM2YzIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNSAxNUwzMyAzMyIgc3Ryb2tlPSIjZjNmM2YzIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==)}.bili-block-uid{display:-webkit-flex;display:flex;align-items:center;justify-content:center;position:absolute;top:72px;right:8px;width:28px;height:28px;border-radius:6px;cursor:pointer;background-color:rgba(33,33,33,.8);z-index:9;transform:translateZ(0)}.bili-block-uid .bili-block-uid__tip{pointer-events:none;user-select:none;position:absolute;bottom:-6px;right:-10px;transform:translateY(100%);font-size:12px;color:#fff;border-radius:4px;line-height:18px;padding:4px 8px;background-color:rgba(0,0,0,.8);white-space:nowrap}',
+                blockDiv: '.bili-block-btn .bili-block-btn__icon{pointer-events:none;user-select:none;width:22px;height:22px;color:#fff}.bili-block-btn__icon{pointer-events:none;user-select:none;width:22px;height:22px;color:#fff;background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDQ4IDQ4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC4wMSIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjQgNDRDMzUuMDQ1NyA0NCA0NCAzNS4wNDU3IDQ0IDI0QzQ0IDEyLjk1NDMgMzUuMDQ1NyA0IDI0IDRDMTIuOTU0MyA0IDQgMTIuOTU0MyA0IDI0QzQgMzUuMDQ1NyAxMi45NTQzIDQ0IDI0IDQ0WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjNmM2YzIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNSAxNUwzMyAzMyIgc3Ryb2tlPSIjZjNmM2YzIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==)}.bili-block-btn{display:-webkit-flex;display:flex;align-items:center;justify-content:center;position:absolute;top:72px;right:8px;width:28px;height:28px;border-radius:6px;cursor:pointer;background-color:rgba(33,33,33,.8);z-index:9;transform:translateZ(0)}.bili-block-btn .bili-block-btn__tip{pointer-events:none;user-select:none;position:absolute;bottom:-6px;right:-10px;transform:translateY(100%);font-size:12px;color:#fff;border-radius:4px;line-height:18px;padding:4px 8px;background-color:rgba(0,0,0,.8);white-space:nowrap}',
                 settingBtn: 'padding:0 4px;height:40px;text-align:center;font-size:12px',
                 settings: '#balh-settings {font-size: 12px;color: #6d757a;}  #balh-settings h1 {color: #161a1e}  #balh-settings a {color: #00a1d6;}  #balh-settings a:hover {color: #f25d8e}  #balh-settings input {margin-left: 3px;margin-right: 3px;}  @keyframes balh-settings-bg { from {background: rgba(0, 0, 0, 0)} to {background: rgba(0, 0, 0, .7)} }  #balh-settings label {width: 100%;display: inline-block;cursor: pointer}  #balh-settings label:after {content: "";width: 0;height: 1px;background: #4285f4;transition: width .3s;display: block}  #balh-settings label:hover:after {width: 100%}  form {margin: 0}  #balh-settings input[type="radio"] {-webkit-appearance: radio;-moz-appearance: radio;appearance: radio;}  #balh-settings input[type="checkbox"] {-webkit-appearance: checkbox;-moz-appearance: checkbox;appearance: checkbox;} '
             };
@@ -46,11 +46,28 @@
         // 添加屏蔽按钮
         addBlockBtn(cardView) {
             var blockBtnDiv = document.createElement("div");
-            blockBtnDiv.setAttribute("class", "bili-block-uid");
+            blockBtnDiv.setAttribute("class", "bili-block-btn");
             blockBtnDiv.setAttribute("style", "display: none;");
-            blockBtnDiv.innerHTML = '<svg class="bili-block-uid__icon" style></svg>'
-            this.blockBtnBind = this.blockBtnClick.bind(this);
-            blockBtnDiv.addEventListener("click", this.blockBtnBind);
+            blockBtnDiv.innerHTML = '<svg class="bili-block-btn__icon" style></svg>'
+
+            var blockBtnClick = function (event) {
+                var cardView = event.currentTarget.parentElement;
+                var cardInfo = cardView.getElementsByClassName("bili-video-card__info")[0];
+                var uidStr = cardInfo.firstElementChild["href"]
+                if (uidStr.length > 0) {
+                    var uid = uidStr.substr(uidStr.lastIndexOf("/") + 1);
+                    console.log(uid + " 已屏蔽");
+                    if (this.addBlockUid(this.blockList, uid) == true) {
+                        this.blockCardView(cardView, uid);
+                    }
+                    this.addBlockBtn(cardView);
+                    this.setCardViewEvent(cardView);
+                }
+                return false;
+            };
+            var blockBtnBind = blockBtnClick.bind(this);
+
+            blockBtnDiv.addEventListener("click", blockBtnBind);
             blockBtnDiv.addEventListener("mouseleave", function () {
                 this.blockBtnEnterFlag = false;
             });
@@ -66,16 +83,19 @@
             cardImage.addEventListener("mouseenter", function (event) {
                 var cardView = event.currentTarget.parentElement.parentElement.parentElement;
                 // console.log(cardView)
-                var blockDiv = cardView.getElementsByClassName("bili-block-uid")[0];
+                var blockDiv = cardView.getElementsByClassName("bili-block-btn")[0];
                 blockDiv.setAttribute("style", "");
             });
-            cardView.addEventListener("mouseleave", function (event) {
+            var leaveEvent = function (event) {
                 var cardView = event.currentTarget;
-                var blockDiv = cardView.getElementsByClassName("bili-block-uid")[0];
+                var blockDiv = cardView.getElementsByClassName("bili-block-btn")[0];
                 if (this.blockBtnEnterFlag == false) {
                     blockDiv.setAttribute("style", "display: none;");
                 }
-            });
+            };
+
+            var leaveEventBind = leaveEvent.bind(this);
+            cardView.addEventListener("mouseleave", leaveEventBind);
         }
 
         addSettingBtn() {
@@ -95,8 +115,10 @@
                 },
                 event: {
                     click: function (e) {
-                        if (e.target === this)
-                            document.body.style.overflow = '', this.remove();
+                        if (e.target === this) {
+                            document.body.style.overflow = '';
+                            this.remove();
+                        }
                     }
                 }
             }, [
@@ -174,21 +196,6 @@
             cardView.innerHTML = blockContext;
         }
 
-        blockBtnClick(event) {
-            var cardView = event.currentTarget.parentElement;
-            var cardInfo = cardView.getElementsByClassName("bili-video-card__info")[0];
-            var uidStr = cardInfo.firstElementChild["href"]
-            if (uidStr.length > 0) {
-                var uid = uidStr.substr(uidStr.lastIndexOf("/") + 1);
-                console.log(uid + " 已屏蔽");
-                if (this.addBlockUid(this.blockList, uid) == true) {
-                    this.blockCardView(cardView, uid);
-                }
-                this.addBlockBtn(cardView);
-                this.setCardViewEvent(cardView);
-            }
-            return false;
-        };
 
         run(cardViewList) {
             // "eva-extension-area" or "recommend-container__"
@@ -240,7 +247,7 @@
         };
     }
 
-    var removeDuplicates = function (nums) {
+    function removeDuplicates(nums) {
         const n = nums.length;
         if (n === 0) {
             return 0;
@@ -295,8 +302,9 @@
                 elem.innerHTML = children;
             } else {
                 for (let i = 0; i < children.length; i++) {
-                    if (children[i] != null)
+                    if (children[i] != null) {
                         elem.appendChild(children[i]);
+                    }
                 }
             }
         }
