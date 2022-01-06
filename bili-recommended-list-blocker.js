@@ -12,6 +12,7 @@
 // @grant        GM_getValue
 // @grant        GM_addStyle
 // @grant        GM_addElement
+// @require      https://s1.hdslb.com/bfs/static/player/main/widgets/jsc-vendors~bscroll~player.2d5aeef6.js
 // @license      MIT
 // ==/UserScript==
 
@@ -25,34 +26,32 @@
             this.css = {
                 settingsPanel: `#brlb-settings {
                     font-size: 12px;
-                    color: #6d757a;
+                    color: #6d757a
                 }
+                
                 #brlb-settings h1 {
                     color: #161a1e
                 }
+                
                 #brlb-settings a {
-                    color: #00a1d6;
+                    color: #00a1d6
                 }
+                
                 #brlb-settings a:hover {
                     color: #f25d8e
                 }
+                
                 #brlb-settings input {
                     margin-left: 3px;
-                    margin-right: 3px;
+                    margin-right: 3px
                 }
-                @keyframes brlb-settings-bg {
-                    from {
-                        background: rgba(0, 0, 0, 0)
-                    }
-                    to {
-                        background: rgba(0, 0, 0, .7)
-                    }
-                }
+                
                 #brlb-settings label {
                     width: 100%;
                     display: inline-block;
                     cursor: pointer
                 }
+                
                 #brlb-settings label:after {
                     content: "";
                     width: 0;
@@ -61,31 +60,42 @@
                     transition: width .3s;
                     display: block
                 }
+                
                 #brlb-settings label:hover:after {
                     width: 100%
                 }
+                
                 form {
                     margin: 0
                 }
-                #brlb-settings input[type="radio"] {
+                
+                #brlb-settings input[type=radio] {
                     -webkit-appearance: radio;
                     -moz-appearance: radio;
-                    appearance: radio;
+                    appearance: radio
                 }
-                #brlb-settings input[type="checkbox"] {
+                
+                #brlb-settings input[type=checkbox] {
                     -webkit-appearance: checkbox;
                     -moz-appearance: checkbox;
-                    appearance: checkbox;
+                    appearance: checkbox
                 }
+                
                 .brlb-block-line-delete {
-                    background: url(${deleteIcon});
+                    background:url(${deleteIcon});
                     width: 16px;
                     background-repeat: no-repeat;
-                    background-position: center;`,
-                bui: `.bui {
+                    background-position: center
+                }`,
+                
+                bui: `.bui,
+                .bui-tabs .bui-tabs-header {
                     display: -webkit-box;
                     display: -ms-flexbox;
-                    display: flex;
+                    display: flex
+                }
+                
+                .bui {
                     vertical-align: middle;
                     -webkit-box-align: center;
                     -ms-flex-align: center;
@@ -94,17 +104,17 @@
                     -ms-flex-pack: center;
                     justify-content: center
                 }
+                
                 .bui-tabs {
                     -webkit-box-pack: start;
                     -ms-flex-pack: start;
                     justify-content: flex-start
                 }
+                
                 .bui-tabs .bui-tabs-header {
-                    display: -webkit-box;
-                    display: -ms-flexbox;
-                    display: flex;
                     margin-bottom: 8px
                 }
+                
                 .bui-tabs .bui-tabs-header .bui-tabs-header-item {
                     text-align: center;
                     margin-right: 20px;
@@ -112,21 +122,24 @@
                     color: #212121;
                     cursor: pointer
                 }
+                
                 .bui-tabs .bui-tabs-header .bui-tabs-header-item.bui-tabs-header-item-active {
                     color: #00a1d6;
                     border-bottom: 1px solid #00a1d6
                 }
+                
                 .bui-tabs .bui-tabs-body .bui-tabs-body-item {
                     display: none
                 }
+                
                 .bui-tabs .bui-tabs-body .bui-tabs-body-item.bui-tabs-body-item-active {
                     display: block
                 }
+                
                 .bui-button {
                     display: -webkit-inline-box;
                     display: -ms-inline-flexbox;
                     display: inline-flex;
-                    cursor: pointer;
                     min-width: 68px;
                     height: 24px;
                     font-size: 12px;
@@ -145,101 +158,121 @@
                     text-align: inherit;
                     line-height: inherit
                 }
+                
+                .bui-button.bui-button-border,
                 .bui-button.bui-button-transparent {
                     color: #fff;
-                    border: 1px solid hsla(0, 0%, 100%, .2)
+                    border: 1px solid rgba(255, 255, 255, .2)
                 }
+                
+                .bui-button.bui-button-border:hover,
                 .bui-button.bui-button-transparent:hover {
                     color: #00a1d6;
                     border-color: #00a1d6
                 }
+                
+                .bui-button,
                 .bui-button.bui-button-border {
-                    color: #fff;
-                    border: 1px solid hsla(0, 0%, 100%, .2);
                     cursor: pointer
                 }
-                .bui-button.bui-button-border:hover {
-                    color: #00a1d6;
-                    border-color: #00a1d6
-                }
+                
                 .bui-button.bui-button-border.bui-button-disabled {
                     background: 0 0;
-                    color: hsla(0, 0%, 100%, .2);
-                    border: 1px solid hsla(0, 0%, 100%, .1)
+                    color: rgba(255, 255, 255, .2);
+                    border: 1px solid rgba(255, 255, 255, .1)
                 }
+                
                 .bui-button.bui-button-border.bui-button-disabled:hover {
                     background: 0 0;
-                    color: hsla(0, 0%, 100%, .2)
+                    color: rgba(255, 255, 255, .2)
                 }
+                
                 .bui-button.bui-button-white {
                     color: #757575;
                     border: 1px solid silver;
                     background-color: #fff
                 }
+                
                 .bui-button.bui-button-white:hover {
                     color: #00a1d6;
                     border-color: #00a1d6
                 }
+                
                 .bui-button.bui-button-gray {
                     background-color: #e5e9ef;
                     color: #212121
                 }
+                
                 .bui-button.bui-button-gray:hover {
                     background-color: #00a1d6;
                     color: #fff
                 }
+                
                 .bui-button.bui-button-gray2 {
                     color: #505050;
                     background-color: #f4f4f4
                 }
+                
                 .bui-button.bui-button-gray2:hover {
                     background-color: #f4f4f4;
                     color: #222
                 }
+                
                 .bui-button.bui-button-gray2.bui-button-disabled,
                 .bui-button.bui-button-gray2.bui-button-disabled:hover {
                     background-color: #f4f4f4;
                     color: #ccd0d7
                 }
+                
                 .bui-button.bui-button-gray3 {
                     color: #999
                 }
+                
                 .bui-button.bui-button-blue,
                 .bui-button.bui-button-gray3:hover {
                     background-color: #00a1d6;
                     color: #fff
                 }
+                
                 .bui-button.bui-button-blue:hover {
                     background-color: #00b5e5
                 }
+                
                 .bui-button.bui-button-blue2 {
                     color: #00a1d6;
                     background-color: #fff;
                     border: 1px solid #00a1d6
                 }
+                
                 .bui-button.bui-button-blue2:hover {
                     background-color: #00a1d6;
                     color: #fff
                 }
+                
                 .bui-button.bui-button-yellow {
                     background-color: #f5b23d;
                     color: #fff
                 }
+                
                 .bui-button.bui-button-yellow:hover {
                     background-color: #ffc154
                 }
+                
                 .bui-button.bui-button-text {
                     color: #00a1d6
                 }
+                
                 .bui-button.bui-button-text:hover {
                     color: #00b5e5
                 }
+                
                 .bui-button.bui-button-disabled {
                     cursor: default;
                     background: #f5f7fa;
                     color: silver;
-                    border: none
+                    border: 0
                 }
+                
                 .bui-button.bui-button-disabled:hover {
                     background: #f5f7fa;
                     color: silver
@@ -248,35 +281,40 @@
                 brlbBlockList: `.brlb-block-setting {
                     padding-bottom: 24px
                 }
+                
                 .brlb-block-label {
                     font-weight: 700;
                     font-size: 12px;
                     color: #18191c;
                     vertical-align: middle
                 }
+                
                 .brlb-block-tabpanel-row {
                     zoom: 1;
                     line-height: 20px;
                     margin-bottom: 4px;
                     font-size: 0
                 }
+                
                 .input-row {
                     display: -webkit-box;
                     display: -ms-flexbox;
                     display: flex
                 }
+                
                 .brlb-block-tabpanel {
                     position: relative;
-                    ;
                     height: auto;
                     -webkit-transition: height .3s;
                     transition: height .3s;
                     pointer-events: auto
                 }
+                
                 .brlb-block-tabpanel.no-bottom {
                     padding-bottom: 0;
                     border-bottom: 0
                 }
+                
                 .brlb-block-tablist {
                     margin: 0 16px;
                     transition-timing-function: cubic-bezier(.165, .84, .44, 1);
@@ -284,6 +322,7 @@
                     transform: translateX(0) translateY(0) translateZ(1px);
                     transition-property: transform
                 }
+                
                 .brlb-block-wrap {
                     width: 320px;
                     flex: none;
@@ -294,6 +333,7 @@
                     -webkit-tap-highlight-color: transparent;
                     height: 377px
                 }
+                
                 .brlb-block-string {
                     -webkit-box-sizing: border-box;
                     box-sizing: border-box;
@@ -310,6 +350,7 @@
                     line-height: 20px;
                     display: inline-block
                 }
+                
                 .bui-button-gray {
                     background-color: #f1f2f3;
                     color: #18191c;
@@ -319,6 +360,14 @@
                     -webkit-box-flex: 1;
                     flex: 1
                 }
+                
+                .brlb-block-empty,
+                .brlb-block-list-function {
+                    text-align: center;
+                    color: #9499a0;
+                    color: var(--text3, #9499a0)
+                }
+                
                 .brlb-block-list-function {
                     display: -webkit-box;
                     display: -ms-flexbox;
@@ -328,20 +377,16 @@
                     justify-content: space-between;
                     padding: 0 6px;
                     font-size: 12px;
-                    line-height: 24px;
-                    text-align: center;
-                    color: #9499a0;
-                    color: var(--text3, #9499a0)
+                    line-height: 24px
                 }
+                
                 .brlb-block-empty {
                     display: none;
                     width: 100%;
                     height: 100%;
-                    line-height: 100px;
-                    text-align: center;
-                    color: #9499a0;
-                    color: var(--text3, #9499a0)
+                    line-height: 100px
                 }
+                
                 .brlb-block-line {
                     display: -webkit-box;
                     display: -ms-flexbox;
@@ -358,19 +403,22 @@
                     position: relative;
                     font-size: 100%
                 }
+                
                 .brlb-block-line>div {
                     font-size: 12px;
                     line-height: 24px;
                     white-space: nowrap;
                     height: 24px;
-                    text-overflow: ellipsis;
+                    text-overflow: ellipsis
                 }
+                
                 .brlb-block-line-content {
                     text-align: left;
                     display: inline-block;
                     width: 150px;
                     padding-left: 4px
                 }
+                
                 .icon-general-del {
                     -webkit-touch-callout: none;
                     -webkit-user-select: none;
@@ -387,11 +435,13 @@
                     -webkit-transition: color .3s;
                     transition: color .3s
                 }
+                
                 .brlb-block-list-function-delete {
-                    padding-right: 16px;
+                    padding-right: 16px
                 }
+                
                 .brlb-block-line-delete {
-                    padding-right: 36px;
+                    padding-right: 36px
                 }`,
             }
             this.listWrap = null;
@@ -677,7 +727,8 @@
             let blockBtnIcon = `data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDQ4IDQ4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC4wMSIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjQgNDRDMzUuMDQ1NyA0NCA0NCAzNS4wNDU3IDQ0IDI0QzQ0IDEyLjk1NDMgMzUuMDQ1NyA0IDI0IDRDMTIuOTU0MyA0IDQgMTIuOTU0MyA0IDI0QzQgMzUuMDQ1NyAxMi45NTQzIDQ0IDI0IDQ0WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjNmM2YzIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xNSAxNUwzMyAzMyIgc3Ryb2tlPSIjZjNmM2YzIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==`;
 
             this.css = {
-                blockBtn: `.brlb-block-btn .brlb-block-btn-icon {
+                blockBtn: `.brlb-block-btn .brlb-block-btn-icon,
+                .brlb-block-btn-icon {
                     pointer-events: none;
                     user-select: none;
                     width: 22px;
@@ -686,12 +737,7 @@
                 }
                 
                 .brlb-block-btn-icon {
-                    pointer-events: none;
-                    user-select: none;
-                    width: 22px;
-                    height: 22px;
-                    color: #fff;
-                    background-image:url(${blockBtnIcon})
+                    background-image: url(${blockBtnIcon})
                 }
                 
                 .brlb-block-btn {
