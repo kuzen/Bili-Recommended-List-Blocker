@@ -2,7 +2,7 @@
 // @name         Bili-Recommended-List-Blocker
 // @description  屏蔽b站首页推荐中的指定up
 // @namespace    https://github.com/kuzen
-// @version      1.7.0
+// @version      1.7.1
 // @author       kuzen
 // @icon         https://www.google.com/s2/favicons?domain=bilibili.com
 // @run-at       document-start
@@ -87,7 +87,7 @@
                     background-repeat: no-repeat;
                     background-position: center
                 }`,
-                
+
                 bui: `.bui,
                 .bui-tabs .bui-tabs-header {
                     display: -webkit-box;
@@ -445,19 +445,28 @@
                 }`,
             }
             this.listWrap = null;
-            setTimeout(() => {
-                this.addSettingBtn();
-            }, 2000);
+            
+            const btnWarpCallback = (mutationsList, observer) => {
+                setTimeout(() => {
+                    this.addSettingBtn();
+                }, 100);
+                this.btnWarpObserver.disconnect();
+            };
+            this.btnWarpObserver = new MutationObserver(btnWarpCallback);
+            let targetNode = document.getElementById("i_cecream");
+            console.log(targetNode);
+            this.btnWarpObserver.observe(targetNode, { attributes: false, childList: true, subtree: false });
         }
 
-        refreshList() {
+        // TODO
+        refreshList(key) {
             if (this.listWrap) {
                 this.listWrap.innerHTML = '';
-                this.addItems();
+                this.addItems(key);
             }
         }
 
-        addItems(text) {
+        addItems(key, text) {
             let itemDom = createElement('div', {
                 className: 'brlb-block-line'
             }, [createElement('div', {
@@ -467,7 +476,7 @@
             })]);
             if (this.listWrap) {
                 if (text == null) {
-                    for (let uid of this.blockList) {
+                    for (let uid of this.blockList.list[key]) {
                         let item = itemDom.cloneNode(true);
                         item.getElementsByClassName('brlb-block-line-content')[0].innerText = uid;
                         this.listWrap.appendChild(item);
@@ -482,11 +491,12 @@
 
         addSettingBtn() {
             let addBtnClick = (event) => {
+                // TODO
                 let uid = event.currentTarget.parentElement.getElementsByClassName('brlb-block-string')[0].value;
                 if (uid.length > 0) {
                     console.log(uid);
-                    this.blockList.add(uid);
-                    this.addItems(uid);
+                    this.blockList.add("uid", uid);
+                    this.addItems("uid", uid);
                 }
             };
             let brlbBlockListWrap = createElement('div', {
@@ -538,14 +548,14 @@
                                             className: 'bui-tabs-header-item bui-tabs-header-item-active',
                                             'data-index': "0"
                                         }, "屏蔽用户"),
-                                        // createElement('div', {
-                                        //     className: 'bui-tabs-header-item',
-                                        //     'data-index': "1"
-                                        // }, "正则屏蔽用户"),
-                                        // createElement('div', {
-                                        //     className: 'bui-tabs-header-item',
-                                        //     'data-index': "2"
-                                        // }, "正则屏蔽视频"),
+                                        createElement('div', {
+                                            className: 'bui-tabs-header-item',
+                                            'data-index': "1"
+                                        }, "正则屏蔽用户"),
+                                        createElement('div', {
+                                            className: 'bui-tabs-header-item',
+                                            'data-index': "2"
+                                        }, "正则屏蔽视频"),
                                     ]),
                                     createElement('div', {
                                         className: 'bui-tabs-body',
@@ -681,7 +691,7 @@
                 event: {
                     click: () => {
                         document.body.appendChild(settingsPanelDom);
-                        this.refreshList();
+                        this.refreshList("uid");
                     }
                 }
             }, '屏蔽设置')
@@ -693,22 +703,23 @@
                 var target = ev.target;
                 if (target.className.toLowerCase() == 'brlb-block-line-delete') {
                     let uid = target.parentElement.firstChild.innerText;
-                    this.blockList.remove(uid);
+                    this.blockList.remove("uid", uid);
                     ev.currentTarget.removeChild(target.parentElement);
                 }
             }
-            // let tabsWrap = settingsPanelDom.getElementsByClassName("bui-tabs-header")[0];
-            // tabsWrap.onclick = (ev) => {
-            //     var ev = ev || window.event;
-            //     var target = ev.target;
-            //     if (target.className.toLowerCase() == 'bui-tabs-header-item') {
-            //         let index = target.getAttribute('data-index');
-            //         for (let tab of ev.currentTarget.getElementsByClassName('bui-tabs-header-item')) {
-            //             tab.classList.remove('bui-tabs-header-item-active');
-            //         }
-            //         target.classList.add('bui-tabs-header-item-active');
-            //     }
-            // }
+            let tabsWrap = settingsPanelDom.getElementsByClassName("bui-tabs-header")[0];
+            tabsWrap.onclick = (ev) => {
+                var ev = ev || window.event;
+                var target = ev.target;
+                if (target.className.toLowerCase() == 'bui-tabs-header-item') {
+                    let index = target.getAttribute('data-index');
+                    for (let tab of ev.currentTarget.getElementsByClassName('bui-tabs-header-item')) {
+                        tab.classList.remove('bui-tabs-header-item-active');
+                    }
+                    target.classList.add('bui-tabs-header-item-active');
+                    // TODO
+                }
+            }
 
             btnWrap.insertBefore(settingBtn, firstBtn);
         }
@@ -800,7 +811,7 @@
                         if (uidStr.length > 0) {
                             let uid = uidStr.substr(uidStr.lastIndexOf("/") + 1);
                             console.log(uid + " 已屏蔽");
-                            if (this.blockList.add(uid) == true) {
+                            if (this.blockList.add("uid", uid) == true) {
                                 this.blockCardView(cardView, uid);
                             }
                             this.addBlockBtn(cardView);
@@ -920,17 +931,6 @@
             return cardView.getElementsByClassName("bili-video-card__info--ad-img").length > 0 ? true : false;
         }
 
-        addRollEvent() {
-            // "换一换"按钮监听事件
-            let rollBtn = document.getElementsByClassName("roll-btn-wrap")[0].firstElementChild;
-            rollBtn.addEventListener("click", () => {
-                setTimeout(() => {
-                    let recommendList = document.querySelectorAll('div[class^="recommend-container__"]')[0].getElementsByClassName('bili-video-card__wrap');
-                    this.run(recommendList);
-                }, 1000);
-            });
-        }
-
         run(cardViewList) {
             for (let cardView of cardViewList) {
                 if (this.isAd(cardView)) {
@@ -942,7 +942,7 @@
                     // 普通视频
                     let uid = this.getUid(cardView);
                     if (uid != null) {
-                        if (this.blockList.isContained(uid)) {
+                        if (this.blockList.isContained("uid", uid)) {
                             this.blockCardView(cardView, uid);
                         }
                     }
@@ -955,36 +955,39 @@
 
     class BlockList {
         constructor() {
-            this.list = JSON.parse(GM_getValue('blockList') || '[]');
-            this.list.sort();
-            this.removeDuplicates(this.list);
-            console.log(this.list)
+            this.list = JSON.parse(GM_getValue('blockList') || '{uid:[],username:[],videoTitle:[]}');
+            if (this.list instanceof Array) {
+                this.list = { "uid": this.list, "username": [], "videoTitle": [] };
+            }
+            for (let key in this.list) {
+                this.list[key] = this.list[key].sort();
+                this.removeDuplicates(key);
+            }
+            console.log(this.list);
         }
 
-        *[Symbol.iterator]() {
-            yield* this.list;
-        }
-        length() {
-            return this.list.length;
-        }
-        isContained(item) {
-            return (this.list[this.search(item)] == item);
+        length(key) {
+            return this.list[key].length;
         }
 
-        add(item) {
-            let index = this.search(item);
-            if (this.list[index] !== item) {
-                this.list.splice(index, 0, item);
+        isContained(key, item) {
+            return (this.list[key][this.search(key, item)] == item);
+        }
+
+        add(key, item) {
+            let index = this.search(key, item);
+            if (this.list[key][index] !== item) {
+                this.list[key].splice(index, 0, item);
                 GM_setValue('blockList', JSON.stringify(this.list));
                 return true;
             }
             return false;
         }
 
-        remove(item) {
-            let index = this.search(item);
-            if (this.list[index] == item) {
-                this.list.splice(index, 1);
+        remove(key, item) {
+            let index = this.search(key, item);
+            if (this.list[key][index] == item) {
+                this.list[key].splice(index, 1);
                 GM_setValue('blockList', JSON.stringify(this.list));
                 return true;
             }
@@ -993,18 +996,18 @@
 
         clr() {
             console.log('清空黑名单')
-            GM_setValue("blockList", '[]');
-            this.list = [];
+            GM_setValue("blockList", '{uid:[],username:[],videoTitle:[]}');
+            this.list = { "uid": [], "username": [], "videoTitle": [] };
         };
 
-        search(target) {
-            const n = this.list.length;
+        search(key, target) {
+            const n = this.list[key].length;
             let left = 0,
                 right = n - 1,
                 ans = n;
             while (left <= right) {
                 let mid = ((right - left) >> 1) + left;
-                if (target <= this.list[mid]) {
+                if (target <= this.list[key][mid]) {
                     ans = mid;
                     right = mid - 1;
                 } else {
@@ -1014,16 +1017,16 @@
             return ans;
         };
 
-        removeDuplicates() {
-            const n = this.list.length;
+        removeDuplicates(key) {
+            const n = this.list[key].length;
             if (n === 0) {
                 return 0;
             }
             let r = 1,
                 l = 1;
             while (r < n) {
-                if (this.list[r] !== this.list[r - 1]) {
-                    this.list[l] = this.list[r];
+                if (this.list[key][r] !== this.list[key][r - 1]) {
+                    this.list[key][l] = this.list[key][r];
                     ++l;
                 }
                 ++r;
@@ -1071,19 +1074,29 @@
         return elem;
     }
 
-    let blockList = new BlockList();
-    let biliBlocker = new BiliBlocker(blockList, true);
-
     window.addEventListener("DOMContentLoaded", function () {
+        let blockList = new BlockList();
+        let biliBlocker = new BiliBlocker(blockList, true);
         let recommendContainer = document.querySelectorAll('div[class^="recommend-container__"]');
         if (recommendContainer.length > 0) {
             //推荐列表
             let recommendList = recommendContainer[0].getElementsByClassName('bili-video-card__wrap');
+            // observer.disconnect();
             biliBlocker.run(recommendList);
             //推广列表
             let evaList = document.querySelectorAll('div[class^="eva-extension-area"]')[0].getElementsByClassName('bili-video-card__wrap');
             biliBlocker.run(evaList);
-            biliBlocker.addRollEvent();
+
+            // TODO 重复处理
+            // 换一换
+            const rollCallback = (mutationsList, observer) => {
+                console.log('换一换');
+                let recommendList = document.querySelectorAll('div[class^="recommend-container__"]')[0].getElementsByClassName('bili-video-card__wrap');
+                biliBlocker.run(recommendList);
+            };
+
+            const rollObserver = new MutationObserver(rollCallback);
+            rollObserver.observe(recommendContainer[0], { attributes: false, childList: true, subtree: false });
         }
     }, false);
 })();
