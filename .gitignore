@@ -1,4 +1,9 @@
+node_modules
+
 *.jpg
 *.webp
 *.css
 *.html
+
+package-lock.json
+package.json
