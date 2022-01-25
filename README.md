@@ -23,9 +23,7 @@ greasyfork: <https://greasyfork.org/zh-CN/scripts/437528-bili-recommended-list-b
 浏览器F12打开控制台，然后输入以下内容回车即可！
 
 ```javascript
-var a = new Date;
-a.setTime(a.getTime() + 24 * 365 * 60 * 60 * 1e3);
-document.cookie = "i-wanna-go-back" + "=" + escape(-1) + ";expires=" + a.toGMTString() + "; path=/; domain=.bilibili.com";
+document.cookie = "i-wanna-go-back=-1; path=/; domain=.bilibili.com";
 location.reload();
 ```
 
