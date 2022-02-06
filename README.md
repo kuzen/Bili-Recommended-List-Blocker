@@ -2,12 +2,13 @@
 
 ## 功能
 
-- 在首页推荐和推广栏的视频卡片的右边会有一个屏蔽按钮，点击即可屏蔽该up主哦.
+- 在首页推荐和推广栏的视频卡片的右边会有一个屏蔽按钮，点击即可屏蔽该up主哦。
+- 重复点击屏蔽按钮可取消屏蔽。
 - 屏蔽了推广栏广告
 
 github: <https://github.com/kuzen/Bili-Recommended-List-Blocker>
 
-greasyfork: <https://greasyfork.org/zh-CN/scripts/437528-bili-recommended-list-blocker>
+greasyfork: <https://greasyfork.org/zh-CN/scripts/437528>
 
 ![20211224212815](https://s2.loli.net/2021/12/24/E4HL193jXkcWsdn.gif)
 
@@ -17,6 +18,7 @@ greasyfork: <https://greasyfork.org/zh-CN/scripts/437528-bili-recommended-list-b
 - 仅适配新版首页，旧版首页未适配！
 - 首页右下角的按钮可打开插件设置
 - 屏蔽图以base64形式保存在脚本中
+- 这份代码能运行到现在简直是个奇迹（
 
 ## 找不到新版主页入口？  
 
