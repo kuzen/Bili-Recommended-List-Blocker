@@ -2,7 +2,7 @@
 // @name         b站首页黑名单 屏蔽首页视频
 // @description  屏蔽b站首页推荐中的指定up
 // @namespace    https://github.com/kuzen
-// @version      1.7.4
+// @version      1.8.0
 // @author       kuzen
 // @icon         https://www.google.com/s2/favicons?domain=bilibili.com
 // @run-at       document-start
@@ -10,11 +10,19 @@
 // @include      *://www.bilibili.com/?*
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @grant        GM_deleteValue
 // @grant        GM_addStyle
+// @grant        GM_log
 // @grant        GM_addElement
 // @license      MIT
 // ==/UserScript==
-
+/* ==UserConfig==
+blockList:
+  uid:
+    title: uid黑名单
+    description: uid黑名单，注意若格式填写有问题则会影响脚本运行！格式为 ["xxx", "xxx"]
+    default: s[]
+ ==/UserConfig== */
 (function() {
   'use strict';
 
@@ -493,7 +501,7 @@
         // TODO
         const uid = event.currentTarget.parentElement.getElementsByClassName('brlb-block-string')[0].value;
         if (uid.length > 0) {
-          console.log(uid);
+          GM_log(uid);
           this.blockList.add('uid', uid);
           this.addItems('uid', uid);
         }
@@ -846,14 +854,14 @@
           }
           if (uid != null) {
             if (cardView.parentElement.dataset.blocked == '1') {
-              console.log(`${uid} 取消屏蔽`);
+              GM_log(`${uid} 取消屏蔽`);
               this.blockList.remove('uid', uid.toString());
               cardView = this.unblockCardView(cardView, id);
               this.addBlockBtn(cardView);
               this.setCardViewEvent(cardView);
             } else {
               if (this.blockList.add('uid', uid.toString()) === true){
-                console.log(`${uid} 已屏蔽`);
+                GM_log(`${uid} 已屏蔽`);
                 cardView = this.blockCardView(cardView, uid);
                 this.addBlockBtn(cardView);
                 this.setCardViewEvent(cardView);
@@ -907,6 +915,7 @@
       return cv;
     }
 
+    // TODO: 合并广告链接检测
     getUid(cardView) {
       const owner = cardView.getElementsByClassName('bili-video-card__info--owner')[0].href;
       if (owner.length > 0) {
@@ -965,17 +974,29 @@
 
   class BlockList {
     constructor() {
-      this.list = JSON.parse(GM_getValue('blockList') || '{"uid":[],"username":[],"title":[]}');
-      // 历史遗留问题（
-      if (this.list instanceof Array) {
-        this.list = {'uid': this.list, 'username': [], 'title': []};
+      // 处理历史遗留问题（逃
+      this.list = JSON.parse(GM_getValue('blockList') || null);
+      if (this.list != null) {
+        if (this.list instanceof Array) {
+          this.list = {'uid': this.list, 'username': [], 'title': []};
+        }
+        Object.entries(this.list).forEach(([key, value]) => {
+          this.list[key] = this.list[key].sort();
+          this.removeDuplicates(key);
+          GM_setValue(`blockList.${key}`, JSON.stringify(this.list[key]));
+        });
+        GM_deleteValue(`blockList`);
       }
+
+      // 新版本读取
+      this.list = {'uid': [], 'username': [], 'title': []};
       Object.entries(this.list).forEach(([key, value]) => {
+        this.list[key] = JSON.parse(GM_getValue(`blockList.${key}`) || '[]');
         this.list[key] = this.list[key].sort();
         this.removeDuplicates(key);
       });
-      console.log(`黑名单列表：`);
-      console.log(this.list);
+      
+      GM_log(`黑名单列表：${JSON.stringify(this.list)}`);
     }
 
     length(key) {
@@ -990,7 +1011,7 @@
       const index = this.search(key, item);
       if (this.list[key][index] !== item) {
         this.list[key].splice(index, 0, item);
-        GM_setValue('blockList', JSON.stringify(this.list));
+        GM_setValue(`blockList.${key}`, JSON.stringify(this.list[key]));
         return true;
       }
       return false;
@@ -1000,15 +1021,17 @@
       const index = this.search(key, item);
       if (this.list[key][index] === item) {
         this.list[key].splice(index, 1);
-        GM_setValue('blockList', JSON.stringify(this.list));
+        GM_setValue(`blockList.${key}`, JSON.stringify(this.list[key]));
         return true;
       }
       return false;
     }
 
     clr() {
-      console.log(`清空黑名单`);
-      GM_setValue('blockList', '{"uid":[],"username":[],"title":[]}');
+      GM_log(`清空黑名单`);
+      GM_setValue('blockList.uid', '[]');
+      GM_setValue('blockList.username', '[]');
+      GM_setValue('blockList.title', '[]');
       this.list = {'uid': [], 'username': [], 'title': []};
     }
 

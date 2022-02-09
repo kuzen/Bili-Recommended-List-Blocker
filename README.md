@@ -10,7 +10,9 @@ github: <https://github.com/kuzen/Bili-Recommended-List-Blocker>
 
 greasyfork: <https://greasyfork.org/zh-CN/scripts/437528>
 
-![20211224212815](https://s2.loli.net/2021/12/24/E4HL193jXkcWsdn.gif)
+![演示](./sample.gif)
+
+<!-- ![演示](https://s2.loli.net/2022/02/09/8UJ9CNxeXBQ1sin.gif) -->
 
 ## PS
 
@@ -32,7 +34,7 @@ location.reload();
 ## TODO
 
 - 添加屏蔽关键词
-- 添加取消按钮
+- 监听黑名单改变，无需刷新即可生效
 
 
 ## Reference
@@ -44,3 +46,7 @@ location.reload();
 屏蔽图：<https://t.bilibili.com/482652949960802810>
 
 头像：<https://t.bilibili.com/441451749597806568>
+
+## 交流
+
+QQ群：415399492
