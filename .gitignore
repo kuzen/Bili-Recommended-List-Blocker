@@ -1,11 +1,12 @@
 node_modules
 
-*.jpg
-*.webp
-*.css
-*.html
+dist/*.svg
+dist/*.png
+dist/*.jpg
+
+
+dist/index.debug.user.js
+dist/index.dev.user.js
 
 package-lock.json
 package.json
-dist/index.debug.user.js
-dist/index.dev.user.js
