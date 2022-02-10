@@ -10,6 +10,8 @@ github: <https://github.com/kuzen/Bili-Recommended-List-Blocker>
 
 greasyfork: <https://greasyfork.org/zh-CN/scripts/437528>
 
+scriptcat: <https://scriptcat.org/script-show-page/300>
+
 ![演示](./sample.gif)
 
 <!-- ![演示](https://s2.loli.net/2022/02/09/8UJ9CNxeXBQ1sin.gif) -->

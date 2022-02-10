@@ -35,30 +35,30 @@ blockList:
                     font-size: 12px;
                     color: #6d757a
                 }
-                
+
                 #brlb-settings h1 {
                     color: #161a1e
                 }
-                
+
                 #brlb-settings a {
                     color: #00a1d6
                 }
-                
+
                 #brlb-settings a:hover {
                     color: #f25d8e
                 }
-                
+
                 #brlb-settings input {
                     margin-left: 3px;
                     margin-right: 3px
                 }
-                
+
                 #brlb-settings label {
                     width: 100%;
                     display: inline-block;
                     cursor: pointer
                 }
-                
+
                 #brlb-settings label:after {
                     content: "";
                     width: 0;
@@ -67,27 +67,27 @@ blockList:
                     transition: width .3s;
                     display: block
                 }
-                
+
                 #brlb-settings label:hover:after {
                     width: 100%
                 }
-                
+
                 form {
                     margin: 0
                 }
-                
+
                 #brlb-settings input[type=radio] {
                     -webkit-appearance: radio;
                     -moz-appearance: radio;
                     appearance: radio
                 }
-                
+
                 #brlb-settings input[type=checkbox] {
                     -webkit-appearance: checkbox;
                     -moz-appearance: checkbox;
                     appearance: checkbox
                 }
-                
+
                 .brlb-block-line-delete {
                     background:url(${deleteIcon});
                     width: 16px;
@@ -101,7 +101,7 @@ blockList:
                     display: -ms-flexbox;
                     display: flex
                 }
-                
+
                 .bui {
                     vertical-align: middle;
                     -webkit-box-align: center;
@@ -111,17 +111,17 @@ blockList:
                     -ms-flex-pack: center;
                     justify-content: center
                 }
-                
+
                 .bui-tabs {
                     -webkit-box-pack: start;
                     -ms-flex-pack: start;
                     justify-content: flex-start
                 }
-                
+
                 .bui-tabs .bui-tabs-header {
                     margin-bottom: 8px
                 }
-                
+
                 .bui-tabs .bui-tabs-header .bui-tabs-header-item {
                     text-align: center;
                     margin-right: 20px;
@@ -129,20 +129,20 @@ blockList:
                     color: #212121;
                     cursor: pointer
                 }
-                
+
                 .bui-tabs .bui-tabs-header .bui-tabs-header-item.bui-tabs-header-item-active {
                     color: #00a1d6;
                     border-bottom: 1px solid #00a1d6
                 }
-                
+
                 .bui-tabs .bui-tabs-body .bui-tabs-body-item {
                     display: none
                 }
-                
+
                 .bui-tabs .bui-tabs-body .bui-tabs-body-item.bui-tabs-body-item-active {
                     display: block
                 }
-                
+
                 .bui-button {
                     display: -webkit-inline-box;
                     display: -ms-inline-flexbox;
@@ -165,121 +165,121 @@ blockList:
                     text-align: inherit;
                     line-height: inherit
                 }
-                
+
                 .bui-button.bui-button-border,
                 .bui-button.bui-button-transparent {
                     color: #fff;
                     border: 1px solid rgba(255, 255, 255, .2)
                 }
-                
+
                 .bui-button.bui-button-border:hover,
                 .bui-button.bui-button-transparent:hover {
                     color: #00a1d6;
                     border-color: #00a1d6
                 }
-                
+
                 .bui-button,
                 .bui-button.bui-button-border {
                     cursor: pointer
                 }
-                
+
                 .bui-button.bui-button-border.bui-button-disabled {
                     background: 0 0;
                     color: rgba(255, 255, 255, .2);
                     border: 1px solid rgba(255, 255, 255, .1)
                 }
-                
+
                 .bui-button.bui-button-border.bui-button-disabled:hover {
                     background: 0 0;
                     color: rgba(255, 255, 255, .2)
                 }
-                
+
                 .bui-button.bui-button-white {
                     color: #757575;
                     border: 1px solid silver;
                     background-color: #fff
                 }
-                
+
                 .bui-button.bui-button-white:hover {
                     color: #00a1d6;
                     border-color: #00a1d6
                 }
-                
+
                 .bui-button.bui-button-gray {
                     background-color: #e5e9ef;
                     color: #212121
                 }
-                
+
                 .bui-button.bui-button-gray:hover {
                     background-color: #00a1d6;
                     color: #fff
                 }
-                
+
                 .bui-button.bui-button-gray2 {
                     color: #505050;
                     background-color: #f4f4f4
                 }
-                
+
                 .bui-button.bui-button-gray2:hover {
                     background-color: #f4f4f4;
                     color: #222
                 }
-                
+
                 .bui-button.bui-button-gray2.bui-button-disabled,
                 .bui-button.bui-button-gray2.bui-button-disabled:hover {
                     background-color: #f4f4f4;
                     color: #ccd0d7
                 }
-                
+
                 .bui-button.bui-button-gray3 {
                     color: #999
                 }
-                
+
                 .bui-button.bui-button-blue,
                 .bui-button.bui-button-gray3:hover {
                     background-color: #00a1d6;
                     color: #fff
                 }
-                
+
                 .bui-button.bui-button-blue:hover {
                     background-color: #00b5e5
                 }
-                
+
                 .bui-button.bui-button-blue2 {
                     color: #00a1d6;
                     background-color: #fff;
                     border: 1px solid #00a1d6
                 }
-                
+
                 .bui-button.bui-button-blue2:hover {
                     background-color: #00a1d6;
                     color: #fff
                 }
-                
+
                 .bui-button.bui-button-yellow {
                     background-color: #f5b23d;
                     color: #fff
                 }
-                
+
                 .bui-button.bui-button-yellow:hover {
                     background-color: #ffc154
                 }
-                
+
                 .bui-button.bui-button-text {
                     color: #00a1d6
                 }
-                
+
                 .bui-button.bui-button-text:hover {
                     color: #00b5e5
                 }
-                
+
                 .bui-button.bui-button-disabled {
                     cursor: default;
                     background: #f5f7fa;
                     color: silver;
                     border: 0
                 }
-                
+
                 .bui-button.bui-button-disabled:hover {
                     background: #f5f7fa;
                     color: silver
@@ -288,27 +288,27 @@ blockList:
         brlbBlockList: `.brlb-block-setting {
                     padding-bottom: 24px
                 }
-                
+
                 .brlb-block-label {
                     font-weight: 700;
                     font-size: 12px;
                     color: #18191c;
                     vertical-align: middle
                 }
-                
+
                 .brlb-block-tabpanel-row {
                     zoom: 1;
                     line-height: 20px;
                     margin-bottom: 4px;
                     font-size: 0
                 }
-                
+
                 .input-row {
                     display: -webkit-box;
                     display: -ms-flexbox;
                     display: flex
                 }
-                
+
                 .brlb-block-tabpanel {
                     position: relative;
                     height: auto;
@@ -316,12 +316,12 @@ blockList:
                     transition: height .3s;
                     pointer-events: auto
                 }
-                
+
                 .brlb-block-tabpanel.no-bottom {
                     padding-bottom: 0;
                     border-bottom: 0
                 }
-                
+
                 .brlb-block-tablist {
                     margin: 0 16px;
                     transition-timing-function: cubic-bezier(.165, .84, .44, 1);
@@ -329,9 +329,9 @@ blockList:
                     transform: translateX(0) translateY(0) translateZ(1px);
                     transition-property: transform
                 }
-                
+
                 .brlb-block-wrap {
-                    width: 320px;
+                    width: 360px;
                     flex: none;
                     border-bottom: 1px solid #e3e5e7;
                     touch-action: pan-x;
@@ -340,7 +340,7 @@ blockList:
                     -webkit-tap-highlight-color: transparent;
                     height: 377px
                 }
-                
+
                 .brlb-block-string {
                     -webkit-box-sizing: border-box;
                     box-sizing: border-box;
@@ -357,7 +357,7 @@ blockList:
                     line-height: 20px;
                     display: inline-block
                 }
-                
+
                 .bui-button-gray {
                     background-color: #f1f2f3;
                     color: #18191c;
@@ -367,14 +367,14 @@ blockList:
                     -webkit-box-flex: 1;
                     flex: 1
                 }
-                
+
                 .brlb-block-empty,
                 .brlb-block-list-function {
                     text-align: center;
                     color: #9499a0;
                     color: var(--text3, #9499a0)
                 }
-                
+
                 .brlb-block-list-function {
                     display: -webkit-box;
                     display: -ms-flexbox;
@@ -386,14 +386,14 @@ blockList:
                     font-size: 12px;
                     line-height: 24px
                 }
-                
+
                 .brlb-block-empty {
                     display: none;
                     width: 100%;
                     height: 100%;
                     line-height: 100px
                 }
-                
+
                 .brlb-block-line {
                     display: -webkit-box;
                     display: -ms-flexbox;
@@ -410,7 +410,7 @@ blockList:
                     position: relative;
                     font-size: 100%
                 }
-                
+
                 .brlb-block-line>div {
                     font-size: 12px;
                     line-height: 24px;
@@ -418,14 +418,14 @@ blockList:
                     height: 24px;
                     text-overflow: ellipsis
                 }
-                
+
                 .brlb-block-line-content {
                     text-align: left;
                     display: inline-block;
                     width: 150px;
                     padding-left: 4px
                 }
-                
+
                 .icon-general-del {
                     -webkit-touch-callout: none;
                     -webkit-user-select: none;
@@ -442,11 +442,11 @@ blockList:
                     -webkit-transition: color .3s;
                     transition: color .3s
                 }
-                
+
                 .brlb-block-list-function-delete {
                     padding-right: 16px
                 }
-                
+
                 .brlb-block-line-delete {
                     padding-right: 36px
                 }`,
@@ -528,7 +528,7 @@ blockList:
                 createElement('input', {
                   type: 'text',
                   className: 'brlb-block-string',
-                  placeholder: '添加屏蔽词，正则以&quot;/&quot;开头&quot;/&quot;结尾',
+                  placeholder: '添加屏蔽词，正则以 / 开头 / 结尾',
                 }),
                 createElement('div', {
                   className: 'brlb-block-string-btn bui bui-button bui-button-gray',
@@ -554,15 +554,15 @@ blockList:
                     createElement('div', {
                       'className': 'bui-tabs-header-item bui-tabs-header-item-active',
                       'data-brlb-Index': '0',
-                    }, '屏蔽用户'),
-                    // createElement('div', {
-                    //   'className': 'bui-tabs-header-item',
-                    //   'data-index': '1',
-                    // }, '正则屏蔽用户'),
-                    // createElement('div', {
-                    //   'className': 'bui-tabs-header-item',
-                    //   'data-index': '2',
-                    // }, '正则屏蔽视频'),
+                    }, '屏蔽用户uid'),
+                    createElement('div', {
+                      'className': 'bui-tabs-header-item',
+                      'data-index': '1',
+                    }, '正则屏蔽用户'),
+                    createElement('div', {
+                      'className': 'bui-tabs-header-item',
+                      'data-index': '2',
+                    }, '正则屏蔽视频'),
                   ]),
                   createElement('div', {
                     className: 'bui-tabs-body',
@@ -642,12 +642,12 @@ blockList:
             padding: '20px',
             top: '50%',
             left: '50%',
-            width: '600px',
+            // width: '600px',
             transform: 'translate(-50%,-50%)',
             cursor: 'default',
           },
         }, [
-          createElement('h1', {}, [createElement('text', `${GM_info.script.name} v${GM_info.script.version} 设置`)]),
+          createElement('h2', {}, [createElement('text', `${GM_info.script.name} v${GM_info.script.version} 设置`)]),
           createElement('br'),
           createElement('br'),
           createElement('form', {
@@ -725,6 +725,7 @@ blockList:
           }
           target.classList.add('bui-tabs-header-item-active');
           // TODO
+          // if (index === '1')
         }
       };
 
@@ -751,11 +752,11 @@ blockList:
                     height: 22px;
                     color: #fff
                 }
-                
+
                 .brlb-block-btn-icon {
                     background-image: url(${blockBtnIcon})
                 }
-                
+
                 .brlb-block-btn {
                     display: -webkit-flex;
                     display: flex;
@@ -772,7 +773,7 @@ blockList:
                     z-index: 9;
                     transform: translateZ(0)
                 }
-                
+
                 .brlb-block-btn .brlb-block-btn-tip {
                     pointer-events: none;
                     user-select: none;
@@ -995,7 +996,7 @@ blockList:
         this.list[key] = this.list[key].sort();
         this.removeDuplicates(key);
       });
-      
+
       GM_log(`黑名单列表：${JSON.stringify(this.list)}`);
     }
 
