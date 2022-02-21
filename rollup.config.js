@@ -9,6 +9,7 @@ const config = {
   postcss: {
     minimize: true,
     extensions: [".css"],
+    inject: false,
     plugins: [
       url({
         url: "inline",
@@ -40,12 +41,20 @@ const metas = {
       name: "copyMetaModule",
     },
     plugins: [
-      // metablock({
-      //   file: "./src/meta.json",
-      // }),
+      metablock({
+        file: "./src/meta.json",
+      }),
     ],
   },
 };
+
+const scriptCatMetas =`/* ==UserConfig==
+blockList:
+  uid:
+    title: uid黑名单
+    description: uid黑名单，注意若格式填写有问题则会影响脚本运行！格式为 ["xxx", "xxx"]
+    default: s[]
+ ==/UserConfig== */`;
 
 const scripts = {
   brlbBlocker: {
@@ -54,6 +63,7 @@ const scripts = {
       file: "./dist/brlbBlocker.user.js",
       format: "iife",
       name: "copyModule",
+      banner: scriptCatMetas,
     },
     plugins: [
       postcss(config.postcss),
@@ -69,5 +79,6 @@ const scripts = {
     ],
   },
 };
+
 
 export default [...Object.values(metas), ...Object.values(scripts)];

@@ -1,10 +1,11 @@
 import {createElement} from './utils';
-import './style/setting.css';
 import {createSettingWarp} from './settingPanel';
+import settingStyle from './style/setting.css';
 
 export default class Setting {
   constructor(blockList) {
     this.blockList = blockList;
+    GM_addStyle(settingStyle);
     this.listWrap = null;
     const btnWarpCallback = (mutationsList, _observer) => {
       setTimeout(() => {

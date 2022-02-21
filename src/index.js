@@ -1,13 +1,6 @@
 import BiliBlocker from './biliBlocker';
 import BlockList from './blockList';
 
-/* ==UserConfig==
-blockList:
-  uid:
-    title: uid黑名单
-    description: uid黑名单，注意若格式填写有问题则会影响脚本运行！格式为 ["xxx", "xxx"]
-    default: s[]
- ==/UserConfig== */
 
 window.addEventListener('DOMContentLoaded', () => {
   const blockList = new BlockList();

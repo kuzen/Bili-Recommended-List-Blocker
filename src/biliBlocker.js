@@ -1,12 +1,13 @@
 import Setting from './setting';
 import {createElement} from './utils';
-import './style/biliBlocker.css';
+import biliBlockerStyle from './style/biliBlocker.css';
 
 export default class BiliBlocker {
   constructor(blockList) {
     this.blockList = blockList;
     this.setting = new Setting(this.blockList);
     this.history = {};
+    GM_addStyle(biliBlockerStyle);
   }
 
   // 添加屏蔽按钮
@@ -57,12 +58,7 @@ export default class BiliBlocker {
       if (target.className.toLowerCase() === 'brlb-block-btn') {
         let cardView = target.parentElement;
         const id = cardView.parentElement.dataset.brlbId;
-        let uid;
-        if (this.isAd(cardView)) {
-          uid = 0;
-        } else {
-          uid = this.getUid(cardView);
-        }
+        const uid = this.getUid(cardView);
         if (uid != null) {
           if (cardView.parentElement.dataset.blocked === '1') {
             GM_log(`${uid} 取消屏蔽`);
@@ -126,19 +122,13 @@ export default class BiliBlocker {
     return cv;
   }
 
-  // TODO: 合并广告链接检测
   getUid(cardView) {
-    const owner = cardView.getElementsByClassName('bili-video-card__info--owner')[0].href;
-    if (owner.length > 0) {
-      const uid = owner.substr(owner.lastIndexOf('/') + 1);
-      return uid;
-    } else {
-      return cardView.parentElement.dataset.brlbUid;
-    }
-  }
-
-  isAd(cardView) {
-    return cardView.getElementsByClassName('bili-video-card__info--ad-img').length > 0;
+    if(cardView.getElementsByClassName('bili-video-card__info--ad-img').length > 0) return 0; // 广告
+    const owner = cardView.getElementsByClassName('bili-video-card__info--owner');
+    if(owner.length === 0) return -1; // 无法识别uid
+    const hlink = owner[0].href;
+    const uid = hlink.substr(hlink.lastIndexOf('/') + 1);
+    return uid;
   }
 
   // 换一换
@@ -163,20 +153,24 @@ export default class BiliBlocker {
   run(cardViewList) {
     let index = 0;
     for (let cardView of cardViewList) {
-      if (this.isAd(cardView)) {
-        // 广告
-        cardView = this.blockCardView(cardView, 0);
-        this.addBlockBtn(cardView);
-        this.setCardViewEvent(cardView);
-      } else {
         // 普通视频
         const uid = this.getUid(cardView);
-        if (uid != null && this.blockList.isContained('uid', uid) === true) {
-          cardView = this.blockCardView(cardView, uid);
+        if(uid === -1) {
+          // 无法识别uid
+          continue;
+        } else if(uid === 0) {
+          // 广告
+          cardView = this.blockCardView(cardView, 0);
+          this.addBlockBtn(cardView);
+          this.setCardViewEvent(cardView);
+        } else {
+          // 普通视频
+          if (uid != null && this.blockList.isContained('uid', uid) === true) {
+            cardView = this.blockCardView(cardView, uid);
+          }
+          this.addBlockBtn(cardView);
+          this.setCardViewEvent(cardView);
         }
-        this.addBlockBtn(cardView);
-        this.setCardViewEvent(cardView);
-      }
       cardView.parentElement.dataset.brlbId = index.toString();
       index++;
     }

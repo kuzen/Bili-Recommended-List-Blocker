@@ -105,7 +105,7 @@ function createBlockListWarp(addEvent) {
 }
 
 function createSettingWarp(closeEvent, clrEvent, addEvent) {
-  brlbBlockListWrap = createBlockListWarp(addEvent);
+  let brlbBlockListWrap = createBlockListWarp(addEvent);
   return createElement('div', {
     id: 'brlb-settings',
     style: {
