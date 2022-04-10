@@ -64,6 +64,7 @@ export default class BiliBlocker {
             GM_log(`${uid} 取消屏蔽`);
             this.blockList.remove('uid', uid.toString());
             cardView = this.unblockCardView(cardView, id);
+            cardView.parentElement.dataset.blocked = '0';
             this.addBlockBtn(cardView);
             this.setCardViewEvent(cardView);
           } else {
@@ -124,6 +125,7 @@ export default class BiliBlocker {
 
   getUid(cardView) {
     if(cardView.getElementsByClassName('bili-video-card__info--ad-img').length > 0) return 0; // 广告
+    if (cardView.parentElement.dataset.brlbUid !== undefined) return cardView.parentElement.dataset.brlbUid;
     const owner = cardView.getElementsByClassName('bili-video-card__info--owner');
     if(owner.length === 0) return -1; // 无法识别uid
     const hlink = owner[0].href;

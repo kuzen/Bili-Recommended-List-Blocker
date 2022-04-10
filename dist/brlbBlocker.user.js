@@ -2,7 +2,7 @@
 // @name        b站首页黑名单 屏蔽首页视频
 // @description 屏蔽b站首页推荐中的指定up
 // @namespace   https://github.com/kuzen
-// @version     1.8.3
+// @version     1.8.4
 // @author      kuzen
 // @icon        https://www.google.com/s2/favicons?domain=bilibili.com
 // @run-at      document-start
@@ -599,6 +599,7 @@ blockList:
                 _this.blockList.remove('uid', uid.toString());
 
                 cardView = _this.unblockCardView(cardView, id);
+                cardView.parentElement.dataset.blocked = '0';
 
                 _this.addBlockBtn(cardView);
 
@@ -645,6 +646,7 @@ blockList:
       value: function getUid(cardView) {
         if (cardView.getElementsByClassName('bili-video-card__info--ad-img').length > 0) return 0; // 广告
 
+        if (cardView.parentElement.dataset.brlbUid !== undefined) return cardView.parentElement.dataset.brlbUid;
         var owner = cardView.getElementsByClassName('bili-video-card__info--owner');
         if (owner.length === 0) return -1; // 无法识别uid
 
