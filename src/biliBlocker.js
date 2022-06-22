@@ -133,6 +133,29 @@ export default class BiliBlocker {
     return uid;
   }
 
+  readMetadata(cardView) {
+    var metadata = {
+      "isAd": false,
+      "uid": 0,
+      "username": "",
+      "BV": "",
+      "title": ""
+    };
+    if(cardView.getElementsByClassName('bili-video-card__info--ad-img').length > 0) {
+      // 广告
+      metadata.isAd = true;
+      return metadata;
+    }
+    metadata.uid = this.getUid(cardView);
+    const bvHref = cardView.getElementsByTagName('a')[0].href;
+    metadata.BV = bvHref.substr(bvHref.lastIndexOf('/')+1);
+
+    metadata.username = cardView.getElementsByClassName('bili-video-card__info--author')[0].innerText;
+    metadata.title = cardView.getElementsByClassName('bili-video-card__info--tit')[0].innerText;
+
+    return metadata;
+  }
+
   // 换一换
   rollObserver(recommendContainer) {
     const rollCallback = (mutationsList, observer) => {
@@ -145,9 +168,9 @@ export default class BiliBlocker {
     rollObse.observe(recommendContainer, config);
   }
 
-  register(container) {
+  register(container, id) {
     const cardViewList = container.getElementsByClassName('bili-video-card__wrap');
-    this.history[container.className] = Array.from(cardViewList);
+    this.history[id] = Array.from(cardViewList);
     this.run(cardViewList);
     this.setBlockBtnEvent(container);
   }

@@ -2,7 +2,7 @@
 // @name        b站首页黑名单 屏蔽首页视频
 // @description 屏蔽b站首页推荐中的指定up
 // @namespace   https://github.com/kuzen
-// @version     1.8.4
+// @version     1.8.6
 // @author      kuzen
 // @icon        https://www.google.com/s2/favicons?domain=bilibili.com
 // @run-at      document-start
@@ -653,6 +653,30 @@ blockList:
         var hlink = owner[0].href;
         var uid = hlink.substr(hlink.lastIndexOf('/') + 1);
         return uid;
+      }
+    }, {
+      key: "readMetadata",
+      value: function readMetadata(cardView) {
+        var metadata = {
+          "isAd": false,
+          "uid": 0,
+          "username": "",
+          "BV": "",
+          "title": ""
+        };
+
+        if (cardView.getElementsByClassName('bili-video-card__info--ad-img').length > 0) {
+          // 广告
+          metadata.isAd = true;
+          return metadata;
+        }
+
+        metadata.uid = this.getUid(cardView);
+        var bvHref = cardView.getElementsByTagName('a')[0].href;
+        metadata.BV = bvHref.substr(bvHref.lastIndexOf('/') + 1);
+        metadata.username = cardView.getElementsByClassName('bili-video-card__info--author')[0].innerText;
+        metadata.title = cardView.getElementsByClassName('bili-video-card__info--tit')[0].innerText;
+        return metadata;
       } // 换一换
 
     }, {
@@ -677,9 +701,9 @@ blockList:
       }
     }, {
       key: "register",
-      value: function register(container) {
+      value: function register(container, id) {
         var cardViewList = container.getElementsByClassName('bili-video-card__wrap');
-        this.history[container.className] = Array.from(cardViewList);
+        this.history[id] = Array.from(cardViewList);
         this.run(cardViewList);
         this.setBlockBtnEvent(container);
       }
@@ -881,15 +905,43 @@ blockList:
   window.addEventListener('DOMContentLoaded', function () {
     var blockList = new BlockList();
     var biliBlocker = new BiliBlocker(blockList);
-    var recommendContainer = document.querySelectorAll('div[class^="recommend-container__"]')[0];
+    var isNewVer = document.querySelectorAll('div[class="bili-feed4"]').length;
 
-    if (recommendContainer != null) {
-      var evaContainer = document.querySelectorAll('div[class^="eva-extension-body"]')[0];
-      biliBlocker.register(recommendContainer);
-      biliBlocker.register(evaContainer); // 延迟一会，避免重复处理
+    if (isNewVer === 1) {
+      // 新版
+      var recommendContainer = document.querySelectorAll('div[class="feed-recommend2"]')[0];
+      biliBlocker.register(recommendContainer); // var index = 0;
+      // var evaContainer = document.querySelectorAll('div[class="feed2-floors"]')[0];
+      // const evaCallback = (mutationsList, observer) => {
+      //   var timer = null;
+      //   clearTimeout(timer);
+      //   evaContainer = document.querySelectorAll('div[class="feed-floor"]');
+      //   timer = setTimeout(() => {
+      //     var i = 0;
+      //     for (i = index; i < evaContainer.length; i++) {
+      //       biliBlocker.register(evaContainer[i], evaContainer[i].id);
+      //     }
+      //     index = i;
+      //     // evaObse.disconnect();
+      //   }, 500);
+      // };
+      // const evaObse = new MutationObserver(evaCallback);
+      // const config = {attributes: false, childList: true, subtree: true};
+      // evaObse.observe(evaContainer, config);
+      // 延迟一会，避免重复处理
 
       setTimeout(function () {
         biliBlocker.rollObserver(recommendContainer);
+      }, 100);
+    } else {
+      // 旧版
+      var _recommendContainer = document.querySelectorAll('div[class^="recommend-container__"]')[0];
+      evaContainer = document.querySelectorAll('div[class^="eva-extension-body"]')[0];
+      biliBlocker.register(_recommendContainer, _recommendContainer.className);
+      biliBlocker.register(evaContainer, evaContainer.className); // 延迟一会，避免重复处理
+
+      setTimeout(function () {
+        biliBlocker.rollObserver(_recommendContainer);
       }, 100);
     }
   }, false);
