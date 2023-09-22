@@ -164,7 +164,7 @@ export default class BiliBlocker {
       this.run(recommendList);
     };
     const rollObse = new MutationObserver(rollCallback);
-    const config = {attributes: false, childList: true, subtree: false};
+    const config = {attributes: false, childList: true, subtree: true};
     rollObse.observe(recommendContainer, config);
   }
 
