@@ -88,7 +88,7 @@ export default class Setting {
     }, '屏蔽设置');
 
     const btnWrap = document.getElementsByClassName('palette-button-wrap')[0];
-    const firstBtn = btnWrap.getElementsByClassName('primary-btn')[1];
+    const firstBtn = btnWrap.getElementsByClassName('top-btn-wrap')[0];
     this.listWrap = settingsPanelWarp.getElementsByClassName('brlb-block-list-wrap')[0];
     
     this.listWrap.onclick = (ev) => {
