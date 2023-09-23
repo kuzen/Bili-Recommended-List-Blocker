@@ -10,12 +10,12 @@ export default class Setting {
     const btnWarpCallback = (mutationsList, _observer) => {
       setTimeout(() => {
         this.addSettingBtn();
-      }, 100);
+      }, 1000);
       this.btnWarpObserver.disconnect();
     };
     this.btnWarpObserver = new MutationObserver(btnWarpCallback);
     const targetNode = document.getElementById('i_cecream');
-    const config = {attributes: false, childList: true, subtree: false};
+    const config = {attributes: false, childList: true, subtree: true};
     this.btnWarpObserver.observe(targetNode, config);
   }
 
@@ -86,9 +86,11 @@ export default class Setting {
         },
       },
     }, '屏蔽设置');
+
     const btnWrap = document.getElementsByClassName('palette-button-wrap')[0];
     const firstBtn = btnWrap.getElementsByClassName('primary-btn')[1];
     this.listWrap = settingsPanelWarp.getElementsByClassName('brlb-block-list-wrap')[0];
+    
     this.listWrap.onclick = (ev) => {
       ev = ev || window.event;
       const target = ev.target;
@@ -98,7 +100,9 @@ export default class Setting {
         ev.currentTarget.removeChild(target.parentElement);
       }
     };
+
     const tabsWrap = settingsPanelWarp.getElementsByClassName('bui-tabs-header')[0];
+
     tabsWrap.onclick = (ev) => {
       ev = ev || window.event;
       const target = ev.target;

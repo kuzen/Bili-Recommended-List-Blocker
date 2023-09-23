@@ -117,7 +117,13 @@ export default class BiliBlocker {
 
   unblockCardView(cardView, id) {
     // 再次点击取消屏蔽
-    const cv = this.history[cardView.parentElement.parentElement.className][id];
+    
+    let node = cardView.parentElement.parentElement
+    if(this.history[node.className] === undefined) {
+        // 推荐视频需要再向上一层
+        node = node.parentElement
+    }
+    const cv = this.history[node.className][id];
     cardView.replaceWith(cv);
     cv.parentElement.dataset.blocked = '0';
     return cv;
