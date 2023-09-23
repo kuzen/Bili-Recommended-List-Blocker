@@ -7,8 +7,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const isNewVer = document.querySelectorAll('div[class="bili-feed4"]').length;
   if (isNewVer === 1) {
     // 新版
-    const recommendContainer = document.querySelectorAll('div[class="feed-recommend2"]')[0];
-    biliBlocker.register(recommendContainer);
+    const recommendContainer = document.querySelectorAll('div[class="recommended-container_floor-aside"] > div')[0];
+    biliBlocker.register(recommendContainer, recommendContainer.className);
     // var index = 0;
     // var evaContainer = document.querySelectorAll('div[class="feed2-floors"]')[0];
     // const evaCallback = (mutationsList, observer) => {
